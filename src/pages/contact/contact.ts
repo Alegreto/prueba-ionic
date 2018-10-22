@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 //Importamos la cámara
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Calendar } from '@ionic-native/calendar';
 
 @Component({
   selector: 'page-contact',
@@ -13,9 +14,11 @@ export class ContactPage {
   //Creo una propiedad para acceder a la imagen.
   base64Image:any;
   muestraFoto:any;
+  MyCalendar:any;
+
 
   //Añadimos la cámara al constructor
-  constructor(public navCtrl: NavController, private camera: Camera, private geolocation: Geolocation) {
+  constructor(private calendar: Calendar, public navCtrl: NavController, private camera: Camera, private geolocation: Geolocation) {
   }
 
   realizaFoto(){
@@ -76,5 +79,11 @@ export class ContactPage {
       // data.coords.longitude
      });
   }
-
+  calendario(){
+  this.calendar.createCalendar('MyCalendar').then(
+    
+    (msg) => { console.log(msg); },
+    (err) => { console.log(err); }
+  );
+}
 }

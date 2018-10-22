@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { TareaModelo } from './TareaModelo';
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
+import {AngularFirestoreCollection, AngularFirestore} from 'angularfire2/firestore'
 
 /*
   Generated class for the ServiciotareaProvider provider.
@@ -15,9 +19,26 @@ export class ServiciotareaProvider {
   //Me creo un array de tareas vacío
   public tareas: TareaModelo[] = [];
 
-  constructor(public http: HttpClient, private storage: Storage) {
+  public coleccion: AngularFirestoreCollection<TareaModelo>;
+  //El observador es el que va a traer toda la información de la base de datos
+  public observador: TareaModelo[];
+
+  constructor(public http: HttpClient, private storage: Storage, public afd:AngularFirestore) {
+    
+    this.coleccion = this.afd.collection('tareas');
+    this.coleccion.snapshotChanges().subscribe(listaTareas => {
+      this.observador = listaTareas.map(item =>{
+        return{
+          descripcion: item.payload.doc.data().descripcion,
+          importante: item.payload.doc.data().importante,
+          realizado: item.payload.doc.data().realizado,
+          id: item.payload.doc.id        
+        }
+      });
+    });
     //Desde el constructor voy a llamar a una función
     this.dameLista();
+
   }
   
   //Coger lo que está almacenado

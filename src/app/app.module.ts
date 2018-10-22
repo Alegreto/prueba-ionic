@@ -19,8 +19,10 @@ import { IonicStorageModule } from '@ionic/storage';
 import { ServiciotareaProvider } from '../servicios/serviciotarea';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
+import {AngularFirestoreModule} from 'angularfire2/firestore'
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { Calendar } from '@ionic-native/calendar';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyC_avaOpDfwnqZfsHnlpKlOcUk37MAAQ8s",
@@ -49,6 +51,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
     IonicStorageModule.forRoot(),
     
   ],
@@ -70,7 +73,8 @@ export const firebaseConfig = {
     Geolocation,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ServiciotareaProvider
+    ServiciotareaProvider,
+    Calendar
   ]
 })
 export class AppModule {}
