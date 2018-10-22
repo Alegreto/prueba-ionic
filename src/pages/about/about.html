@@ -15,9 +15,13 @@
           <ion-item color="light" [style.font-weight]='600'>
               <ion-label [ngStyle]="{'color': tarea.importante? 'red': 'black'}">{{ tarea.descripcion }}</ion-label>
               <ion-checkbox [checked]="tarea.realizado"></ion-checkbox>
+              <!-- <ion-label>{{tarea.id}}</ion-label> -->
           </ion-item>
           <ion-item-options side="right">
-              <button ion-button (click)="borraTarea(tarea)">Borrar</button>
+              <button ion-button color="danger" (click)="borraTarea(tarea)">
+                  <ion-icon name="trash"></ion-icon>
+                  Borrar
+              </button>
               <button ion-button (click)="actualizaTarea(tarea)">Actualizar</button>
           </ion-item-options>
         </ion-item-sliding>

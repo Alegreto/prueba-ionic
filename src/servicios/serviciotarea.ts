@@ -37,6 +37,7 @@ export class ServiciotareaProvider {
       });
     });
     //Desde el constructor voy a llamar a una función
+    
     this.dameLista();
 
   }
@@ -65,14 +66,19 @@ export class ServiciotareaProvider {
   }
   public addTarea(tarea:TareaModelo){
     this.tareas.push(tarea);
+    this.afd.collection('tareas')
+    .add({descripcion: tarea.descripcion, realizado: tarea.realizado, importante: tarea.importante})
+    .then();
   }
 
-  public borrado(tarea:TareaModelo){
+  //Para borrar usamos el id
+  public borrado(tarea){
     let index = this.tareas.indexOf(tarea);
     this.tareas.splice(index, 1);
+    //console.log(tarea.id);
+    this.afd.doc(`tareas/${tarea.id}`).delete().then();
   }
 
   
-
 
 }

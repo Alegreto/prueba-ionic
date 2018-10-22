@@ -51,7 +51,7 @@ export class AboutPage {
     return estilos;
   }
 
-  //Está función llamará al servicio
+  //Está función llamará a una función que tengo en el servicio
   anyadeTarea(tarea:TareaModelo){
     this.servicioTarea.addTarea(tarea);
     this.servicioTarea.salvarLocal();
